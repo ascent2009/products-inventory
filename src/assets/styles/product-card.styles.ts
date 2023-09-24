@@ -36,7 +36,7 @@ export const SContentWrap = styled.div`
     h4 {
         color: blue;
         width: 100%;
-        margin: 2rem auto;
+        margin: auto;
         // align-self: center;
     }
     p {
@@ -52,4 +52,17 @@ export const SPrice = styled.div`
     align-self: center;
     font-size: 20px;
     font-weight: bold;
+`;
+
+export const SButton = styled.button`
+    width: 6rem;
+    align-self: flex-end;
+    background: blue;
+    color: white;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+    &:active {
+        transform: translateY(2px);
+    }
 `;

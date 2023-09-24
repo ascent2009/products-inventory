@@ -1,6 +1,7 @@
 import { memo, FC } from 'react';
-import { SList, SListItem, SContentWrapper, SPrice, SImageWrapper } from '../../../assets/styles/product-list.styles';
+import { SList, SListItem } from '../../../assets/styles/product-list.styles';
 import { ProductModel } from '../../../models/product.model';
+import ProductCard from '../card/product-card.component';
 
 type ProductListProps = { products: ProductModel[] };
 
@@ -10,14 +11,7 @@ const ProductList: FC<ProductListProps> = memo(({ products }) => {
             {products.map(({ id, title, image, description, price }) => {
                 return (
                     <SListItem key={id}>
-                        <SImageWrapper>
-                            <img src={image} alt={title} style={{ width: '100%', height: '100%' }} />
-                        </SImageWrapper>
-                        <SContentWrapper>
-                            <h4>{title}</h4>
-                            <p style={{ textAlign: 'left' }}>{description}</p>
-                        </SContentWrapper>
-                        <SPrice>${price}</SPrice>
+                        <ProductCard id={id} title={title} image={image} description={description} price={price} />
                     </SListItem>
                 );
             })}

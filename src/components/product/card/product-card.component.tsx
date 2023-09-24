@@ -1,4 +1,4 @@
-import React, { memo, FC } from 'react';
+import { memo, FC } from 'react';
 import { ProductModel } from '../../../models/product.model';
 import {
     SHeading,
@@ -8,13 +8,15 @@ import {
     SContentWrap,
     SPrice,
 } from '../../../assets/styles/product-card.styles';
+import Description from './Description';
 
 type ProductCardProps = ProductModel;
 
 const ProductCard: FC<ProductCardProps> = memo(({ title, image, price, description }) => {
+    const maxLength: number = 150;
     return (
         <SContainer>
-            <SHeading>Product Card</SHeading>
+            {/* <SHeading>Product Card</SHeading> */}
 
             <SCardWrap>
                 <SImageWrap>
@@ -22,7 +24,7 @@ const ProductCard: FC<ProductCardProps> = memo(({ title, image, price, descripti
                 </SImageWrap>
                 <SContentWrap>
                     <h4>{title}</h4>
-                    <p>{description}</p>
+                    <Description text={description} maxLength={maxLength} />
                 </SContentWrap>
 
                 <SPrice>${price}</SPrice>
