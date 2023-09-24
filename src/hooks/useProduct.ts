@@ -1,31 +1,21 @@
-import { useState, useEffect } from 'react';
-import { ProductModel } from '../models/product.model';
+import { useEffect } from 'react';
 import { fetchProductsApi } from '../services/product-api.service';
+import { useAppDispatch, useAppSelector } from './typedHooks';
+import { selectProducts, selectLoading, selectError } from '../store/product/product.selectors';
 
 export const useProduct = () => {
-    const [products, setProducts] = useState<ProductModel[]>([]);
-    const [error, setError] = useState<string>('');
-    const [loading, setLoading] = useState<boolean>(false);
-
-    async function fetchProducts() {
-        try {
-            const response = await fetchProductsApi();
-            setProducts(response.data);
-        } catch (e) {
-            setError(`Something went wrong! Error: ${e}`);
-        } finally {
-            setLoading(false);
-        }
-    }
+    const products = useAppSelector(selectProducts);
+    const loading = useAppSelector(selectLoading);
+    const error = useAppSelector(selectError);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        setLoading(true);
-        fetchProducts();
-    }, []);
+        dispatch(fetchProductsApi());
+    }, [dispatch]);
 
     return {
         loading,
         error,
-        products
-    }
+        products,
+    };
 };

@@ -9,7 +9,7 @@ const ProductList: FC<ProductListProps> = memo(({ products }) => {
         <SList>
             {products.map(({ id, title, image, description, price }) => {
                 return (
-                    <SListItem>
+                    <SListItem key={id}>
                         <SImageWrapper>
                             <img src={image} alt={title} style={{ width: '100%', height: '100%' }} />
                         </SImageWrapper>
