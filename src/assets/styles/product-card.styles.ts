@@ -12,6 +12,7 @@ export const SHeading = styled.h3`
 `;
 
 export const SCardWrap = styled.article`
+    position: relative;
     display: flex;
     justify-content: space-between;
     border: 1px dashed grey;
@@ -40,9 +41,10 @@ export const SContentWrap = styled.div`
         // align-self: center;
     }
     p {
-        // width: 100%;
+        width: 100%;
         margin: 2rem auto;
         align-self: center;
+        overflow-wrap: break-word;
     }
 `;
 
@@ -57,12 +59,22 @@ export const SPrice = styled.div`
 export const SButton = styled.button`
     width: 6rem;
     align-self: flex-end;
-    background: blue;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
     color: white;
+    font-size: 14px;
     border-radius: 15px;
     outline: none;
     border: none;
+    cursor: pointer;
     &:active {
         transform: translateY(2px);
     }
+`;
+
+export const SDeleteButton = styled(SButton)`
+    position: absolute;
+    right: 1rem;
+    top: 2rem;
+    background: none;
 `;

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { ProductStateModel } from '../../models/state/product-state.model';
-import { fetchProductsApi } from '../../services/product-api.service';
+import { fetchProductsApi, createProductApi } from '../../services/product-api.service';
 
 const initialState: ProductStateModel = {
     products: [],
@@ -15,6 +15,9 @@ export const productsSlice = createSlice({
     reducers: {
         setProductsAction: (state: ProductStateModel | any, action: PayloadAction<ProductStateModel>) =>
             (state.products = action.payload),
+        addNewProductAction: (state, action) => {
+            state.products.unshift(action.payload);
+        },
     },
     extraReducers: builder =>
         builder
@@ -28,8 +31,19 @@ export const productsSlice = createSlice({
             .addCase(fetchProductsApi.rejected, (state: ProductStateModel | any, error) => {
                 state.error = `Something went wrong! Error: ${error.meta.requestStatus}`;
                 state.loading = false;
+            })
+            .addCase(createProductApi.pending, state => {
+                state.loading = true;
+            })
+            .addCase(createProductApi.fulfilled, (state: any, action) => {
+                state.loading = false;
+                state.products.unshift(action.payload);
+            })
+            .addCase(createProductApi.rejected, (state, error) => {
+                state.error = `Something went wrong! Error: ${error.meta.requestStatus}`;
+                state.loading = false;
             }),
 });
 
-export const { setProductsAction } = productsSlice.actions;
+export const { setProductsAction, addNewProductAction } = productsSlice.actions;
 export default productsSlice.reducer;

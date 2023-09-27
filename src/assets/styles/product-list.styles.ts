@@ -2,7 +2,9 @@ import styled from 'styled-components';
 
 export const SList = styled.ul`
     margin: auto;
+    padding: 0;
     width: 80%;
+    position: relative;
 `;
 
 export const SListItem = styled.li`
